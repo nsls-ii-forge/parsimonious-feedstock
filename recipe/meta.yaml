@@ -1,0 +1,40 @@
+{% set name = "parsimonious" %}
+{% set version = "0.8.1" %}
+{% set sha256 = "3add338892d580e0cb3b1a39e4a1b427ff9f687858fdd61097053742391a9f6b" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/p/parsimonious/parsimonious-{{ version }}.tar.gz
+  sha256: {{ sha256 }}
+
+build:
+  noarch: python
+  number: 0
+  script: "{{ PYTHON }} -m pip install . --no-deps -vv"
+
+requirements:
+  build:
+    - python
+    - pip
+  run:
+    - python
+    - six >=1.9.0
+
+test:
+  imports:
+    - parsimonious
+  commands:
+    - python -m nose -s -v parsimonious -e test_benchmarks
+  requires:
+    - nose
+
+about:
+  home: https://github.com/erikrose/parsimonious/
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
+  summary: (Soon to be) the fastest pure-Python PEG parser I could muster
+  description: (Soon to be) the fastest pure-Python PEG parser I could muster
